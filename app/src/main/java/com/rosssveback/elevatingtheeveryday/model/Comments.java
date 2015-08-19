@@ -8,7 +8,6 @@ public class Comments {
     private String date;
     private String content;
     private int id;
-    private Integer ids;
 
     public Comments() {
     }
@@ -32,21 +31,47 @@ public class Comments {
         return Integer.valueOf(this.getId()).hashCode();
     }
 
+    /**
+     * Getter and setter for name of the commenter
+     * @return
+     */
     public String getName(){
         return name;
     }
     public void setName(String name){
         this.name = name;
     }
+
+    /**
+     * Getter and setter for the ID of the commenter
+     * @return
+     */
     public Integer getId(){
         return id;
     }
     public void setId(Integer id){
         this.id = id;
     }
-    //public Stringj
-    public void setIds(Integer ids){
-        this.ids = ids;
+
+    /**
+     * Getter and setter for the date of comment
+     * @return
+     */
+    public String getDate(){
+        return date;
+    }
+    public void setDate(String date){
+        this.date = date;
     }
 
+    /**
+     * Getter and setter for the content of the comment
+     * @return
+     */
+    public String getContent(){
+        return content;
+    }
+    public void setContent(String content){
+        this.content = content;
+    }
 }
