@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,29 +17,55 @@ import android.webkit.CookieManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.TextView;
 
+import com.rosssveback.elevatingtheeveryday.adaptor.CommentsViewAdaptor;
+import com.rosssveback.elevatingtheeveryday.model.Comments;
 import com.rosssveback.elevatingtheeveryday.util.Config;
 import com.rosssveback.elevatingtheeveryday.util.MyWebViewClient;
+
+import java.util.ArrayList;
 
 import me.declangao.wordpressreader.R;
 
 /**
  * Fragment to display a Disqus comments page.
  * Activities that contain this fragment must implement the
- * {@link CommentFragment.CommentListener} interface
+ * {@link CommentFragment.CommentsListListener} interface
  * to handle interaction events.
  */
 public class CommentFragment extends Fragment {
     private static final String TAG = "CommentFragment";
+    protected static final String POST_ID = "id";
+    protected static final String QUERY = "query";
 
     private WebView webView;
     private Toolbar toolbar;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private RecyclerView mRecyclerView;
+    private TextView mLoadingView;
+    private CommentsViewAdaptor mCommentsViewAdaptor;
+    private LinearLayoutManager mLayoutManager;
+    private ArrayList<Comments> commentsList = new ArrayList<>();
+    private boolean isLoading = false;
+    private boolean isSearch = false;
+    private int mPastVisibleItems;
+    private int mVisibleItemCount;
 
-    private CommentListener mListener;
+    private CommentsListListener mListener;
 
     public CommentFragment() {
         // Required empty public constructor
     }
+
+    public static CommentFragment newInstance(int id){
+        CommentFragment fragment = new CommentFragment();
+        Bundle args = new Bundle();
+        args.putInt(POST_ID, id);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -131,7 +160,7 @@ public class CommentFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (CommentListener) activity;
+            mListener = (CommentsListListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement CommentListener");
@@ -148,7 +177,7 @@ public class CommentFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface CommentListener {
+    public interface CommentsListListener {
         void onHomePressed();
     }
 }
