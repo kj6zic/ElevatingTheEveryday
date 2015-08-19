@@ -1,5 +1,7 @@
 package com.rosssveback.elevatingtheeveryday.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by a1121661 on 8/18/15.
  */
@@ -8,6 +10,7 @@ public class Comments {
     private String date;
     private String content;
     private int id;
+    private ArrayList<String> comments;
 
     public Comments() {
     }

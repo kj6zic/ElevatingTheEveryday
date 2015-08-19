@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.rosssveback.elevatingtheeveryday.app.AppController;
 import com.rosssveback.elevatingtheeveryday.model.Category;
+import com.rosssveback.elevatingtheeveryday.model.Comments;
 import com.rosssveback.elevatingtheeveryday.model.Post;
 
 import org.json.JSONArray;
@@ -18,7 +19,7 @@ import me.declangao.wordpressreader.R;
  * Utility class used to parse JSON data
  */
 public class JSONParser {
-    private static final String	TAG	= "JSONParser";
+    private static final String TAG = "JSONParser";
 
     /**
      * Parse JSON data and return an ArrayList of Category objects
@@ -40,7 +41,7 @@ public class JSONParser {
             categoryArrayList.add(all);
 
             // Go through all categories and get their details
-            for (int i=0; i<categories.length(); i++) {
+            for (int i = 0; i < categories.length(); i++) {
                 // Get individual category Json object
                 JSONObject catObj = categories.getJSONObject(i);
                 Log.d(TAG, "Parsing " + catObj.getString("title") + ", ID " + catObj.getInt("id"));
@@ -67,7 +68,7 @@ public class JSONParser {
     public static ArrayList<Post> parsePosts(JSONObject jsonObject) {
         ArrayList<Post> posts = new ArrayList<>();
 
-        try{
+        try {
             JSONArray postArray = jsonObject.getJSONArray("posts");
             // Go through each post
             for (int i = 0; i < postArray.length(); i++) {
@@ -106,7 +107,31 @@ public class JSONParser {
         return posts;
     }
 
-    //public static ArrayList<Post> parseComments(JSONObject jsonObject) {
-      //  ArrayList<Post> posts = new ArrayList<>();
-    //}
+    public static ArrayList<Comments> parseComments(JSONObject jsonObject) {
+        ArrayList<Comments> comments = new ArrayList<>();
+
+        try {
+            JSONArray commentsArray = jsonObject.getJSONArray("comments");
+
+            for (int i = 0; i < commentsArray.length(); i++) {
+                JSONObject commentsObject = commentsArray.getJSONObject(i);
+
+                Comments comment = new Comments();
+                comment.setName(commentsObject.optString("name", "N/A"));
+                comment.setContent(commentsObject.optString("content", "N/A"));
+                comment.setDate(commentsObject.optString("date", "N/A"));
+                comment.setId(commentsObject.optInt("id"));
+
+                comments.add(comment);
+
+            }
+        } catch (JSONException e) {
+            Log.d(TAG, "----------------- Json Exception");
+            Log.d(TAG, e.getMessage());
+            return null;
+        }
+        return comments;
+    }
+
+
 }
