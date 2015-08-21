@@ -14,7 +14,7 @@ import me.declangao.wordpressreader.R;
 public class MainActivity extends AppCompatActivity implements
         RecyclerViewFragment.PostListListener, PostFragment.PostListener,
         TabLayoutFragment.TabLayoutListener, SearchResultFragment.SearchResultListener,
-        CommentFragment.CommentListener {
+        CommentFragment.CommentsListListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     public static final String TAB_LAYOUT_FRAGMENT_TAG = "TabLayoutFragment";
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements
         Bundle args = new Bundle();
         args.putInt("id", id);
         // Setup CommentFragment to display the right comments page
-        cf.setUIArguments(args);
+        //cf.setUIArguments(args);
 
         FragmentTransaction ft = fm.beginTransaction();
         ft.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right,
@@ -136,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements
      */
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
 //
 //        FragmentManager fm = getSupportFragmentManager();
 //        Fragment currentFragment = fm.findFragmentById(R.id.content_frame);

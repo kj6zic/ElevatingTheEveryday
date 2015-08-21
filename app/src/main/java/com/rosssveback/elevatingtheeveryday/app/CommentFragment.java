@@ -1,28 +1,21 @@
 package com.rosssveback.elevatingtheeveryday.app;
 
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.CookieManager;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.rosssveback.elevatingtheeveryday.adaptor.CommentsViewAdaptor;
 import com.rosssveback.elevatingtheeveryday.model.Comments;
-import com.rosssveback.elevatingtheeveryday.util.Config;
-import com.rosssveback.elevatingtheeveryday.util.MyWebViewClient;
 
 import java.util.ArrayList;
 
@@ -34,7 +27,7 @@ import me.declangao.wordpressreader.R;
  * {@link CommentFragment.CommentsListListener} interface
  * to handle interaction events.
  */
-public class CommentFragment extends Fragment {
+public class CommentFragment extends Fragment{
     private static final String TAG = "CommentFragment";
     protected static final String POST_ID = "id";
     protected static final String QUERY = "query";
@@ -49,8 +42,18 @@ public class CommentFragment extends Fragment {
     private ArrayList<Comments> commentsList = new ArrayList<>();
     private boolean isLoading = false;
     private boolean isSearch = false;
+
+    //this is to keep track of the items in the recycler view
     private int mPastVisibleItems;
     private int mVisibleItemCount;
+
+
+    private int totalItemCount;
+    private int mPage = 1; //Page number
+    private int post_id; //ID of the wordPress post
+    private int mCommentNum; //Number of comments in the wordPress post
+    private int mPreviousCommentNum = 0; // Number of comments in the Post
+
 
     private CommentsListListener mListener;
 
@@ -81,13 +84,60 @@ public class CommentFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_comment, container, false);
 
+        //pull to refresh
+        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        mLoadingView = (TextView) rootView.findViewById(R.id.text_view_loading);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        getActivity().setTitle(getResources().getString(R.string.action_comments));
         toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
 
+        //pull to refresh listener
+        //mSwipeRefreshLayout.setOnRefreshListener(this);
+
         // Setup WebView
-        webView = (WebView) rootView.findViewById(R.id.webView_comment);
+        //webView = (WebView) rootView.findViewById(R.id.webView_comment);
+
+        mCommentsViewAdaptor = new CommentsViewAdaptor(commentsList);
+
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mCommentsViewAdaptor);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy){
+
+                mPastVisibleItems = mLayoutManager.getChildCount();
+                mVisibleItemCount = mLayoutManager.findFirstVisibleItemPosition();
+
+                int totalItemCount = mLayoutManager.getItemCount();
+
+                if(mCommentNum > mPreviousCommentNum && !commentsList.isEmpty()
+                        && mVisibleItemCount != 0 && totalItemCount > mVisibleItemCount && !isLoading
+                        && (mPastVisibleItems + mVisibleItemCount) >= totalItemCount){
+
+                    //update the comment number
+                    mPreviousCommentNum = mCommentNum;
+                }
+            }
+
+        });
 
         return rootView;
     }
+
+    /**
+     * load comment page
+     * @param item
+     * @return
+     */
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -102,7 +152,7 @@ public class CommentFragment extends Fragment {
      *
      * @param args Bundle containing information about the new comments page
      */
-    protected void setUIArguments(final Bundle args) {
+    /*protected void setUIArguments(final Bundle args) {
         getActivity().runOnUiThread(new Runnable() {
             public void run() {
                 int id = args.getInt("id");
@@ -141,7 +191,7 @@ public class CommentFragment extends Fragment {
                         .setTitle(getString(R.string.action_comments));
             }
         });
-    }
+    }*/
 
     /**
      * Eliminate the chance of showing previous content by clearing the fragment on hidden.

@@ -77,4 +77,12 @@ public class Comments {
     public void setContent(String content){
         this.content = content;
     }
+
+    public ArrayList<String> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<String> categories) {
+        this.comments = categories;
+    }
 }

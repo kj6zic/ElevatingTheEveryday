@@ -10,6 +10,7 @@
     <string name="tab_all">All</string>
     <string name="loading_categories">Loading categories…</string>
     <string name="loading_articles">Loading articles…</string>
+    <string name="loading_comments">Loading Comments</string>
     <string name="action_refresh">Refresh</string>
     <string name="action_send_to_wear">Send to my watch</string>
     <string name="error_load_categories">Network error. Failed to load categories.</string>
@@ -20,7 +21,7 @@
 
 
     <!-- In app navigation-->
-    <string name="exitapplication">"Exit the Ross Sveback Experience"</string>
+    <string name="exitapplication">"Exit the <Ross></Ross> Sveback Experience"</string>
     <string name="exityes">"Yes"</string>
     <string name="exitno">"No"</string>
 
