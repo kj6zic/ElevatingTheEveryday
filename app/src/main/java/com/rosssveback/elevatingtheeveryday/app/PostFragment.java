@@ -89,7 +89,7 @@ public class PostFragment extends Fragment implements View.OnClickListener{
 
         CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout)
                 rootView.findViewById(R.id.collapsingToolbarLayout);
-        collapsingToolbarLayout.setTitle(getString(R.string.app_name));
+        //collapsingToolbarLayout.setTitle(getString(R.string.app_name));
 
         nestedScrollView = (NestedScrollView) rootView.findViewById(R.id.nestedScrollView);
 

@@ -2,22 +2,35 @@ package com.rosssveback.elevatingtheeveryday.app;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.rosssveback.elevatingtheeveryday.adaptor.CommentsViewAdaptor;
 import com.rosssveback.elevatingtheeveryday.model.Comments;
+import com.rosssveback.elevatingtheeveryday.util.Config;
+import com.rosssveback.elevatingtheeveryday.util.JSONParser;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import me.declangao.wordpressreader.R;
 
@@ -27,12 +40,12 @@ import me.declangao.wordpressreader.R;
  * {@link CommentFragment.CommentsListListener} interface
  * to handle interaction events.
  */
-public class CommentFragment extends Fragment{
+public class CommentFragment extends Fragment {
     private static final String TAG = "CommentFragment";
     protected static final String POST_ID = "id";
     protected static final String QUERY = "query";
 
-    private WebView webView;
+    //private WebView webView;
     private Toolbar toolbar;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -50,7 +63,7 @@ public class CommentFragment extends Fragment{
 
     private int totalItemCount;
     private int mPage = 1; //Page number
-    private int post_id; //ID of the wordPress post
+    private int mpostId; //ID of the wordPress post
     private int mCommentNum; //Number of comments in the wordPress post
     private int mPreviousCommentNum = 0; // Number of comments in the Post
 
@@ -61,7 +74,7 @@ public class CommentFragment extends Fragment{
         // Required empty public constructor
     }
 
-    public static CommentFragment newInstance(int id){
+    public static CommentFragment newInstance(int id) {
         CommentFragment fragment = new CommentFragment();
         Bundle args = new Bundle();
         args.putInt(POST_ID, id);
@@ -89,7 +102,7 @@ public class CommentFragment extends Fragment{
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mLoadingView = (TextView) rootView.findViewById(R.id.text_view_loading);
         mLayoutManager = new LinearLayoutManager(getActivity());
-        getActivity().setTitle(getResources().getString(R.string.action_comments));
+        //getActivity().setTitle(getResources().getString(R.string.action_comments));
         toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
 
         //pull to refresh listener
@@ -111,16 +124,16 @@ public class CommentFragment extends Fragment{
             }
 
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy){
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 
                 mPastVisibleItems = mLayoutManager.getChildCount();
                 mVisibleItemCount = mLayoutManager.findFirstVisibleItemPosition();
 
                 int totalItemCount = mLayoutManager.getItemCount();
 
-                if(mCommentNum > mPreviousCommentNum && !commentsList.isEmpty()
+                if (mCommentNum > mPreviousCommentNum && !commentsList.isEmpty()
                         && mVisibleItemCount != 0 && totalItemCount > mVisibleItemCount && !isLoading
-                        && (mPastVisibleItems + mVisibleItemCount) >= totalItemCount){
+                        && (mPastVisibleItems + mVisibleItemCount) >= totalItemCount) {
 
                     //update the comment number
                     mPreviousCommentNum = mCommentNum;
@@ -134,9 +147,109 @@ public class CommentFragment extends Fragment{
 
     /**
      * load comment page
-     * @param item
+     *
+     * @param
      * @return
      */
+    public void loadCommentPage() {
+        mPage = 1; // Reset page number
+
+        if (commentsList.isEmpty()) {
+            showLoadingView();
+            // Reset post number to 0
+            mPreviousCommentNum = 0;
+            loadComments(mPage, false);
+        } else {
+            hideLoadingView();
+        }
+    }
+
+    /**
+     * @param page
+     * @param showLoadingMsg
+     */
+    private void loadComments(int page, final boolean showLoadingMsg) {
+
+        Log.d(TAG, "----------------- Loading post id " + mpostId +
+                ", page " + String.valueOf(page));
+
+        isLoading = true;
+
+        if (showLoadingMsg) {
+            Toast.makeText(getActivity(), getString(R.string.loading_comments),
+                    Toast.LENGTH_LONG).show();
+        }
+
+        // Construct the proper API Url
+        //this is work in progress
+        String url;
+            url = Config.POST_URL + String.valueOf(mpostId);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        mSwipeRefreshLayout.setRefreshing(false); // Stop when done
+
+                        // Parse JSON data
+                        commentsList.addAll(JSONParser.parseComments(jsonObject));
+
+                        // A temporary workaround to avoid downloading duplicate posts in some
+                        // rare circumstances by converting ArrayList to a LinkedHashSet without
+                        // losing its order
+                        Set<Comments> set = new LinkedHashSet<>(commentsList);
+                        commentsList.clear();
+                        commentsList.addAll(new ArrayList<>(set));
+
+                        mCommentNum = commentsList.size(); // The newest post number
+                        Log.d(TAG, "Number of comments: " + mCommentNum);
+                        mCommentsViewAdaptor.notifyDataSetChanged(); // Display the list
+
+                        // Set ListView position
+                        if (CommentFragment.this.mPage != 1) {
+                            // Move the article list up by one row
+                            // We don't actually need to add 1 here since position starts at 0
+                            mLayoutManager.scrollToPosition(mPastVisibleItems + mVisibleItemCount);
+                        }
+
+                        // Loading finished. Set flag to false
+                        isLoading = false;
+
+                        hideLoadingView();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        isLoading = false;
+                        hideLoadingView();
+                        mSwipeRefreshLayout.setRefreshing(false);
+
+                        volleyError.printStackTrace();
+                        Log.d(TAG, "----- Error: " + volleyError.getMessage());
+
+                        // Show a Snackbar with a retry button
+                        Snackbar.make(mRecyclerView, R.string.error_load_posts,
+                                Snackbar.LENGTH_LONG).setAction(R.string.action_retry,
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        //loadFirstPage();
+                                        loadComments(mPage, true);
+                                    }
+                                }).show();
+                    }
+                });
+
+        // Set timeout to 10 seconds instead of the default value 5 since my
+        // crappy server is quite slow
+        request.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        // Add request to request queue
+        AppController.getInstance().addToRequestQueue(request, TAG);
+
+    }
 
 
     @Override
@@ -195,17 +308,15 @@ public class CommentFragment extends Fragment{
 
     /**
      * Eliminate the chance of showing previous content by clearing the fragment on hidden.
-     *
      */
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        if (webView != null && hidden) {
-            webView.loadData("", "text/html; charset=UTF-8", null);
-        }
-
-        super.onHiddenChanged(hidden);
-    }
-
+//    @Override
+//    public void onHiddenChanged(boolean hidden) {
+//        if (webView != null && hidden) {
+//            webView.loadData("", "text/html; charset=UTF-8", null);
+//        }
+//
+//        super.onHiddenChanged(hidden);
+//    }
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -230,4 +341,21 @@ public class CommentFragment extends Fragment{
     public interface CommentsListListener {
         void onHomePressed();
     }
+
+    /**
+     * Show the loading view and hide the list
+     */
+    private void showLoadingView() {
+        mRecyclerView.setVisibility(View.INVISIBLE);
+        mLoadingView.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * Hide the loading view and show the list
+     */
+    private void hideLoadingView() {
+        mLoadingView.setVisibility(View.INVISIBLE);
+        mRecyclerView.setVisibility(View.VISIBLE);
+    }
+
 }

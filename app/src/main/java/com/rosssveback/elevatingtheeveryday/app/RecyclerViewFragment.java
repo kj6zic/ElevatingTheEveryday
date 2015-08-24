@@ -2,6 +2,7 @@ package com.rosssveback.elevatingtheeveryday.app;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,6 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +24,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.rosssveback.elevatingtheeveryday.adaptor.MyRecyclerViewAdaptor;
+import com.rosssveback.elevatingtheeveryday.model.Post;
+import com.rosssveback.elevatingtheeveryday.util.Config;
+import com.rosssveback.elevatingtheeveryday.util.JSONParser;
+import com.rosssveback.elevatingtheeveryday.util.MyRecyclerScroll;
 
 import org.json.JSONObject;
 
@@ -26,11 +36,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import com.rosssveback.elevatingtheeveryday.model.Post;
-import com.rosssveback.elevatingtheeveryday.util.JSONParser;
 import me.declangao.wordpressreader.R;
-import com.rosssveback.elevatingtheeveryday.adaptor.MyRecyclerViewAdaptor;
-import com.rosssveback.elevatingtheeveryday.util.Config;
 
 /**
  * Fragment to display a RecyclerView.
@@ -45,6 +51,7 @@ public class RecyclerViewFragment extends Fragment implements SwipeRefreshLayout
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
+    private FloatingActionButton fab;
     private MyRecyclerViewAdaptor mAdaptor;
     private LinearLayoutManager mLayoutManager;
     // Widget to show user a loading message
@@ -100,13 +107,11 @@ public class RecyclerViewFragment extends Fragment implements SwipeRefreshLayout
     }
 
     public RecyclerViewFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getArguments() != null) {
             mCatId = getArguments().getInt(CAT_ID, -1);
             mQuery = getArguments().getString(QUERY, "");
@@ -116,17 +121,37 @@ public class RecyclerViewFragment extends Fragment implements SwipeRefreshLayout
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_recycler_view, container, false);
-
-        // Pull to refresh layout
         mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+
+        fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mLoadingView = (TextView) rootView.findViewById(R.id.text_view_loading);
         mLayoutManager = new LinearLayoutManager(getActivity());
 
-        // Pull to refresh listener
-        mSwipeRefreshLayout.setOnRefreshListener(this);
+        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.simple_grow);
+        fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        fab.startAnimation(animation);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Your FAB click action here...
+                Toast.makeText(getActivity(), "FAB Clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mRecyclerView.setOnScrollListener(new MyRecyclerScroll() {
+            @Override
+            public void show() {
+                fab.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
+            }
+
+            @Override
+            public void hide() {
+                fab.animate().translationY(fab.getHeight() + fab.getWidth()).setInterpolator(new AccelerateInterpolator(2)).start();
+            }
+        });
 
         // RecyclerView adaptor for Post object
         mAdaptor = new MyRecyclerViewAdaptor(postList, new MyRecyclerViewAdaptor.OnItemClickListener() {
@@ -340,5 +365,4 @@ public class RecyclerViewFragment extends Fragment implements SwipeRefreshLayout
     public interface PostListListener {
         void onPostSelected(Post post, boolean isSearch);
     }
-
 }
