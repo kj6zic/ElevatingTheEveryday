@@ -52,6 +52,7 @@ public class RecyclerViewFragment extends Fragment implements SwipeRefreshLayout
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private FloatingActionButton fab;
+    private int fabMargin;
     private MyRecyclerViewAdaptor mAdaptor;
     private LinearLayoutManager mLayoutManager;
     // Widget to show user a loading message
@@ -130,6 +131,7 @@ public class RecyclerViewFragment extends Fragment implements SwipeRefreshLayout
         mLoadingView = (TextView) rootView.findViewById(R.id.text_view_loading);
         mLayoutManager = new LinearLayoutManager(getActivity());
 
+        fabMargin = getResources().getDimensionPixelSize(R.dimen.fab_margin);
         Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.simple_grow);
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.startAnimation(animation);

@@ -9,18 +9,20 @@ public abstract class MyRecyclerScroll extends RecyclerView.OnScrollListener{
 
     int scrollDist = 0;
     boolean isVisible = true;
-    static final float MINIMUM = 25;
+    private static final float HIDE_THRESHOLD = 100;
+    private static final float SHOW_THRESHOLD = 50;
+    //static final float MINIMUM = 25;
 
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
 
-        if (isVisible && scrollDist > MINIMUM) {
+        if (isVisible && scrollDist > HIDE_THRESHOLD) {
             hide();
             scrollDist = 0;
             isVisible = false;
         }
-        else if (!isVisible && scrollDist < -MINIMUM) {
+        else if (!isVisible && scrollDist < -SHOW_THRESHOLD) {
             show();
             scrollDist = 0;
             isVisible = true;
