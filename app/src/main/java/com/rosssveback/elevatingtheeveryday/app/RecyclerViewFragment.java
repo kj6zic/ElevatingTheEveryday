@@ -12,10 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +24,6 @@ import com.rosssveback.elevatingtheeveryday.adaptor.MyRecyclerViewAdaptor;
 import com.rosssveback.elevatingtheeveryday.model.Post;
 import com.rosssveback.elevatingtheeveryday.util.Config;
 import com.rosssveback.elevatingtheeveryday.util.JSONParser;
-import com.rosssveback.elevatingtheeveryday.util.MyRecyclerScroll;
 
 import org.json.JSONObject;
 
@@ -126,11 +121,12 @@ public class RecyclerViewFragment extends Fragment implements SwipeRefreshLayout
         mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
-        fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mLoadingView = (TextView) rootView.findViewById(R.id.text_view_loading);
         mLayoutManager = new LinearLayoutManager(getActivity());
 
+        /*fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fabMargin = getResources().getDimensionPixelSize(R.dimen.fab_margin);
         Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.simple_grow);
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
@@ -153,7 +149,7 @@ public class RecyclerViewFragment extends Fragment implements SwipeRefreshLayout
             public void hide() {
                 fab.animate().translationY(fab.getHeight() + fab.getWidth()).setInterpolator(new AccelerateInterpolator(2)).start();
             }
-        });
+        });*/
 
         // RecyclerView adaptor for Post object
         mAdaptor = new MyRecyclerViewAdaptor(postList, new MyRecyclerViewAdaptor.OnItemClickListener() {
@@ -318,8 +314,6 @@ public class RecyclerViewFragment extends Fragment implements SwipeRefreshLayout
                     }
                 });
 
-        // Set timeout to 10 seconds instead of the default value 5 since my
-        // crappy server is quite slow
         request.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 

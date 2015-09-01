@@ -34,10 +34,29 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/title"
             android:textColor="@color/postTitleTextColor"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="sans-serif-condensed"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/thumbnail"
             android:layout_toEndOf="@+id/thumbnail" />
+
+        <LinearLayout
+            android:id="@+id/favorite_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dip"
+            android:orientation="horizontal"
+            android:layout_below="@+id/title"
+            android:layout_toRightOf="@+id/thumbnail">
+
+            <ImageView
+                android:id="@+id/favheart_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/favoritethis"
+                android:paddingRight="10dip"
+                android:scaleType="center"/>
+
+        </LinearLayout>
 
         <!-- Article comment count -->
         <TextView
@@ -48,7 +67,7 @@
             android:layout_alignBottom="@+id/thumbnail"
             android:textColor="@color/navigationBarColor"
             android:layout_alignParentRight="true"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="sans-serif-condensed"
             android:layout_alignParentEnd="true" />
 
         <!-- Article view count -->

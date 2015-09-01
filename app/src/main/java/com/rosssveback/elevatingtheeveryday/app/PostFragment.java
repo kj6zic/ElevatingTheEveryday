@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -33,6 +34,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.rosssveback.elevatingtheeveryday.model.Post;
 
 import me.declangao.wordpressreader.R;
 
@@ -51,20 +53,24 @@ public class PostFragment extends Fragment implements View.OnClickListener{
     private String url;
     private String featuredImageUrl;
     boolean isImageFitToScreen;
-
     private WebView webView;
-
     private ImageView featuredImageView;
     private Toolbar toolbar;
+    private FloatingActionButton fab;
     private NestedScrollView nestedScrollView;
-
     private AppBarLayout appBarLayout;
     private CoordinatorLayout coordinatorLayout;
-
     private PostListener mListener;
+    private Post post;
+    //use this boolean value to check if the post exists in the favorite list by comparing post_ids
+    private boolean isFavorited;
 
-    public PostFragment() {
+    public  PostFragment(){
+    }
+
+    public PostFragment(Post post) {
         // Required empty public constructor
+        this.post = post;
     }
 
     @Override
@@ -81,11 +87,7 @@ public class PostFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_post, container, false);
-
         toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
-        //((MainActivity)getActivity()).setSupportActionBar(toolbar);
-
-
 
         CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout)
                 rootView.findViewById(R.id.collapsingToolbarLayout);
@@ -99,6 +101,9 @@ public class PostFragment extends Fragment implements View.OnClickListener{
 
         featuredImageView = (ImageView) rootView.findViewById(R.id.featuredImage);
         featuredImageView.setOnClickListener(this);
+
+        fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(this);
 
         // Create the WebView
         webView = (WebView) rootView.findViewById(R.id.webview_post);
@@ -184,6 +189,13 @@ public class PostFragment extends Fragment implements View.OnClickListener{
             intent.setDataAndType(Uri.parse(featuredImageUrl), "image/*");
             startActivity(intent);
                 }
+        if(v == fab){
+            //TODO: favorite the Post by using Post_id and then add that post to the favorites list
+            fab.setImageDrawable(getResources().getDrawable(R.drawable.favoriteditem));
+            Toast.makeText(v.getContext(),
+                    "Post added to Favorites",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

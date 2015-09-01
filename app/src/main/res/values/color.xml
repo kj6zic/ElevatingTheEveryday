@@ -7,5 +7,6 @@
     <color name="commentCardBg">#ffffff</color>
     <color name="navigationBarColor">#000000</color>
     <color name="textColor">#FFDE00</color>
-    <color name="postTitleTextColor">#846d00</color>
+    <color name="postTitleTextColor">#ffd300</color>
+    <color name="cardTextColor">#FFFF2E2C</color>
 </resources>
