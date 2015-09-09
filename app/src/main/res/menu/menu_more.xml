@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/twitter"
+        android:title="@string/twitter"/>
+    <item
+        android:id="@+id/facebook"
+        android:title="@string/facebook"/>
+    <item
+        android:id="@+id/whatshot"
+        android:title="@string/endorse"/>
+    <item
+        android:id="@+id/empty"
+        android:title="@string/more">
+        <menu>
+            <item
+                android:id="@+id/about"
+                android:icon="@drawable/infoicon"
+                android:title="@string/about"/>
+        </menu>
+    </item>
+
+</menu>

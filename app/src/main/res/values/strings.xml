@@ -26,4 +26,39 @@
     <string name="exityes">"Yes"</string>
     <string name="exitno">"No"</string>
 
+    <!--Navigation Drawer Items -->
+    <string-array name="nav_drawer_items">
+        <item >My Posts</item>
+        <item >Twitter Feed</item>
+        <item >Facebook Me</item>
+        <item >Support</item>
+        <item >Events</item>
+        <item >What\'s Hot</item>
+    </string-array>
+
+    <array name="nav_drawer_icons">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </array>
+
+    <!--More Menu Titles -->
+    <string name="twitter">Twitter</string>
+    <string name="facebook">Facebook</string>
+    <string name="endorse">Endorsement of the Month</string>
+    <string name="more">More</string>
+    <string name="about">About</string>
+
+    <!-- URLS -->
+    <string name="twitterUrl">https://twitter.com/sveback</string>
+    <string name="facebookUrl">https://www.facebook.com/pages/Ross-Sveback/173406649344384</string>
+    <string name="endorseUrl">http://www.uggaustralia.com/</string>
+
+    <string name="desc_list_item_icon">Item Icon</string>
+    <string name="app_name_ross">Ross Sveback - Elevating The Everyday</string>
+    <string name="aboutme">"Lifestyle expert, featured in Arch Digest, VOGUE and Delta Sky Magazine.\nVoted Top 100 Most Influential People by Mpls/St.Paul Magazine - FOX Lifestyle Expert"</string>
+
 </resources>

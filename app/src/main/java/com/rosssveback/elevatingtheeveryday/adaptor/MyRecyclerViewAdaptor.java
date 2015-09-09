@@ -2,6 +2,7 @@ package com.rosssveback.elevatingtheeveryday.adaptor;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,8 +50,11 @@ public class MyRecyclerViewAdaptor extends RecyclerView.Adapter<MyRecyclerViewAd
                 .load(posts.get(i).getThumbnailUrl())
                 .centerCrop()
                 .into(viewHolder.thumbnailImageView);
-
-        viewHolder.title.setText(posts.get(i).getTitle());
+        if(posts.get(i).getThumbnailUrl() == null && posts.get(i).getFeaturedImageUrl() != null){
+            viewHolder.thumbnailImageView.setImageResource(R.drawable.app_icon);
+        }
+        //using HTML decoder to display title "&" issues.
+        viewHolder.title.setText(Html.fromHtml("<font face = 'Sans-Serif-condensed'>" + posts.get(i).getTitle()+ "</font>"));
 
         int count = posts.get(i).getCommentCount();
         String countText = (count == 1 || count == 0) ? count + " Comment" : count + " Comments";
