@@ -1,5 +1,6 @@
 package com.rosssveback.elevatingtheeveryday.app;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -28,6 +29,7 @@ public class FacebookFragment extends Fragment implements SwipeRefreshLayout.OnR
         super.onActivityCreated(savedInstanceState);
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.facebook, container, false);

@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements
     public static final String FB = "FacebookFragment";
     public static final String TF = "TwitterFragment";
     public static final String EF = "WhatsHotFragment";
+    public static final String FF = "Favorites";
 
     private FragmentManager fm = null;
     private TabLayoutFragment tlf;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements
     private FacebookFragment fbf;
     private TwitterFragment tf;
     private WhatsHotFragment etm;
+    private Favorites ff;
 
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
@@ -117,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements
         fbf = new FacebookFragment();
         tf = new TwitterFragment();
         etm = new WhatsHotFragment();
+        ff = new Favorites();
 
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(android.R.id.content, pf, POST_FRAGMENT_TAG);
@@ -125,7 +128,9 @@ public class MainActivity extends AppCompatActivity implements
         ft.add(android.R.id.content, fbf, FB);
         ft.add(android.R.id.content, tf, TF);
         ft.add(android.R.id.content, etm, EF);
+        ft.add(android.R.id.content, ff, FF);
 
+        ft.hide(ff);
         ft.hide(etm);
         ft.hide(tf);
         ft.hide(fbf);
@@ -339,15 +344,22 @@ public class MainActivity extends AppCompatActivity implements
             ft.commit();
             return true;
         }
-        else if(item.getItemId() == R.id.whatshot) {
+        else if (item.getItemId() == R.id.favorites) {
+            ff = (Favorites) getSupportFragmentManager().findFragmentByTag(FF);
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.show(ff);
+            ft.addToBackStack(null);
+            ft.commit();
+            return true;
+        }
+        else if (item.getItemId() == R.id.whatshot) {
             etm = (WhatsHotFragment) getSupportFragmentManager().findFragmentByTag(EF);
             FragmentTransaction ft = fm.beginTransaction();
             ft.show(etm);
             ft.addToBackStack(null);
             ft.commit();
             return true;
-        }
-        else if(item.getItemId() == R.id.about) {
+        } else if (item.getItemId() == R.id.about) {
             alertScrollView();
         }
         return (super.onOptionsItemSelected(item));

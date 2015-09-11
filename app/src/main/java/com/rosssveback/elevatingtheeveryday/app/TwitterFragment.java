@@ -38,6 +38,7 @@ public class TwitterFragment extends Fragment implements SwipeRefreshLayout.OnRe
         WebSettings webSettings = twitterWebView.getSettings();
         twitterWebView.setWebViewClient(new SWWebViewClient());
         webSettings.setJavaScriptEnabled(true);
+        //webSettings.setUserAgentString("Mozilla/5.0 (Linux; U; Android 2.0; en-us; Droid Build/ESD20) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Mobile Safari/530.17");
         twitterWebView.loadUrl(getResources().getString(R.string.twitterUrl));
 
         twitterWebView.setOnKeyListener(new View.OnKeyListener() {

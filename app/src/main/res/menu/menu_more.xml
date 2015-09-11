@@ -11,6 +11,9 @@
         android:id="@+id/whatshot"
         android:title="@string/endorse"/>
     <item
+        android:id="@+id/favorites"
+        android:title="@string/favorites"/>
+    <item
         android:id="@+id/empty"
         android:title="@string/more">
         <menu>
