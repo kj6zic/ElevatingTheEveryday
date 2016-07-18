@@ -56,7 +56,7 @@ public class PostFragment extends Fragment implements View.OnClickListener{
     private WebView webView;
     private ImageView featuredImageView;
     private Toolbar toolbar;
-    private FloatingActionButton fab;
+    //private FloatingActionButton fab;
     private NestedScrollView nestedScrollView;
     private AppBarLayout appBarLayout;
     private CoordinatorLayout coordinatorLayout;
@@ -102,8 +102,8 @@ public class PostFragment extends Fragment implements View.OnClickListener{
         featuredImageView = (ImageView) rootView.findViewById(R.id.featuredImage);
         featuredImageView.setOnClickListener(this);
 
-        fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
-        fab.setOnClickListener(this);
+        //fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        //fab.setOnClickListener(this);
 
         // Create the WebView
         webView = (WebView) rootView.findViewById(R.id.webview_post);
@@ -189,13 +189,13 @@ public class PostFragment extends Fragment implements View.OnClickListener{
             intent.setDataAndType(Uri.parse(featuredImageUrl), "image/*");
             startActivity(intent);
                 }
-        if(v == fab){
-            //TODO: favorite the Post by using Post_id and then add that post to the favorites list
-            fab.setImageDrawable(getResources().getDrawable(R.drawable.favoriteditem));
-            Toast.makeText(v.getContext(),
-                    "Post added to Favorites",
-                    Toast.LENGTH_SHORT).show();
-        }
+//        if(v == fab){
+//            //TODO: favorite the Post by using Post_id and then add that post to the favorites list
+//            fab.setImageDrawable(getResources().getDrawable(R.drawable.favoriteditem));
+//            Toast.makeText(v.getContext(),
+//                    "Post added to Favorites",
+//                    Toast.LENGTH_SHORT).show();
+//        }
     }
 
     @Override
@@ -222,14 +222,14 @@ public class PostFragment extends Fragment implements View.OnClickListener{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_comments:
-                mListener.onCommentSelected(id);
-                return true;
+            //case R.id.action_comments:
+                //mListener.onCommentSelected(id);
+                //return true;
             case R.id.action_share:
                 return true;
-            case R.id.action_send_to_wear:
-                sendToWear();
-                return true;
+//            case R.id.action_send_to_wear:
+//                sendToWear();
+//                return true;
             case android.R.id.home:
                 mListener.onHomePressed();
                 return true;

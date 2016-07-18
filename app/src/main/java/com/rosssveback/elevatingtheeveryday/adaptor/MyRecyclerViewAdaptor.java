@@ -58,7 +58,7 @@ public class MyRecyclerViewAdaptor extends RecyclerView.Adapter<MyRecyclerViewAd
 
         int count = posts.get(i).getCommentCount();
         String countText = (count == 1 || count == 0) ? count + " Comment" : count + " Comments";
-        viewHolder.commentCount.setText(countText);
+        //viewHolder.commentCount.setText(countText);
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,14 +76,14 @@ public class MyRecyclerViewAdaptor extends RecyclerView.Adapter<MyRecyclerViewAd
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView thumbnailImageView;
         TextView title;
-        TextView commentCount;
+        //TextView commentCount;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             thumbnailImageView = (ImageView) itemView.findViewById(R.id.thumbnail);
             title = (TextView) itemView.findViewById(R.id.title);
-            commentCount = (TextView) itemView.findViewById(R.id.comment_count);
+            //commentCount = (TextView) itemView.findViewById(R.id.comment_count);
         }
 
     }

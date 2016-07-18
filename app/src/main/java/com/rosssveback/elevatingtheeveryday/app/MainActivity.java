@@ -343,14 +343,14 @@ public class MainActivity extends AppCompatActivity implements
             ft.addToBackStack(null);
             ft.commit();
             return true;
-        }
-        else if (item.getItemId() == R.id.favorites) {
-            ff = (Favorites) getSupportFragmentManager().findFragmentByTag(FF);
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.show(ff);
-            ft.addToBackStack(null);
-            ft.commit();
-            return true;
+        //}
+//        else if (item.getItemId() == R.id.favorites) {
+//            ff = (Favorites) getSupportFragmentManager().findFragmentByTag(FF);
+//            FragmentTransaction ft = fm.beginTransaction();
+//            ft.show(ff);
+//            ft.addToBackStack(null);
+//            ft.commit();
+//            return true;
         }
         else if (item.getItemId() == R.id.whatshot) {
             etm = (WhatsHotFragment) getSupportFragmentManager().findFragmentByTag(EF);

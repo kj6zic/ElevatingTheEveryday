@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Elevating the Everyday</string>
+    <string name="app_name">Ross Sveback</string>
     <string name="action_settings">Settings</string>
     <string name="action_comments">Comments</string>
     <string name="title_activity_article">Article</string>
@@ -29,7 +29,7 @@
     <!--More Menu Titles -->
     <string name="twitter">Twitter</string>
     <string name="facebook">Facebook</string>
-    <string name="endorse">Endorsement of the Month</string>
+    <string name="endorse">Instagram</string>
     <string name="favorites">Favorites</string>
     <string name="more">More</string>
     <string name="about">About</string>
@@ -37,7 +37,7 @@
     <!-- URLS -->
     <string name="twitterUrl">https://twitter.com/sveback</string>
     <string name="facebookUrl">https://www.facebook.com/pages/Ross-Sveback/173406649344384</string>
-    <string name="endorseUrl">http://www.uggaustralia.com/</string>
+    <string name="endorseUrl">https://www.instagram.com/rosssveback/?hl=en</string>
 
     <string name="desc_list_item_icon">Item Icon</string>
     <string name="app_name_ross">Ross Sveback - Elevating The Everyday</string>

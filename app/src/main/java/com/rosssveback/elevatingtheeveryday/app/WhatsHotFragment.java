@@ -38,7 +38,7 @@ public class WhatsHotFragment extends Fragment implements SwipeRefreshLayout.OnR
         WebSettings webSettings = endorseWebView.getSettings();
         endorseWebView.setWebViewClient(new SWWebViewClient());
         webSettings.setJavaScriptEnabled(true);
-        endorseWebView.loadUrl("http://www.uggaustralia.com/");
+        endorseWebView.loadUrl("https://www.instagram.com/rosssveback/?hl=en");
 
         endorseWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override
