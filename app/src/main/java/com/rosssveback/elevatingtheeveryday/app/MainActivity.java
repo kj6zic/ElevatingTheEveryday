@@ -317,32 +317,32 @@ public class MainActivity extends AppCompatActivity implements
         mDrawerToggle.onConfigurationChanged(newConfig);
     }*/
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_more, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if(item.getItemId() == R.id.twitter) {
-            tf = (TwitterFragment) getSupportFragmentManager().findFragmentByTag(TF);
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.show(tf);
-            ft.addToBackStack(null);
-            ft.commit();
-            return true;
-        }
-        else if(item.getItemId() == R.id.facebook) {
-            //Toast msg = Toast.makeText(MainActivity.this, "Menu 999", Toast.LENGTH_LONG);
-            //msg.show();
-            fbf = (FacebookFragment) getSupportFragmentManager().findFragmentByTag(FB);
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.show(fbf);
-            ft.addToBackStack(null);
-            ft.commit();
-            return true;
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_more, menu);
+//        return true;
+//    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//        if(item.getItemId() == R.id.twitter) {
+//            tf = (TwitterFragment) getSupportFragmentManager().findFragmentByTag(TF);
+//            FragmentTransaction ft = fm.beginTransaction();
+//            ft.show(tf);
+//            ft.addToBackStack(null);
+//            ft.commit();
+//            return true;
+//        }
+//        else if(item.getItemId() == R.id.facebook) {
+//            //Toast msg = Toast.makeText(MainActivity.this, "Menu 999", Toast.LENGTH_LONG);
+//            //msg.show();
+//            fbf = (FacebookFragment) getSupportFragmentManager().findFragmentByTag(FB);
+//            FragmentTransaction ft = fm.beginTransaction();
+//            ft.show(fbf);
+//            ft.addToBackStack(null);
+//            ft.commit();
+//            return true;
         //}
 //        else if (item.getItemId() == R.id.favorites) {
 //            ff = (Favorites) getSupportFragmentManager().findFragmentByTag(FF);
@@ -352,32 +352,32 @@ public class MainActivity extends AppCompatActivity implements
 //            ft.commit();
 //            return true;
         }
-        else if (item.getItemId() == R.id.whatshot) {
-            etm = (WhatsHotFragment) getSupportFragmentManager().findFragmentByTag(EF);
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.show(etm);
-            ft.addToBackStack(null);
-            ft.commit();
-            return true;
-        } else if (item.getItemId() == R.id.about) {
-            alertScrollView();
-        }
-        return (super.onOptionsItemSelected(item));
-    }
+//        else if (item.getItemId() == R.id.whatshot) {
+//            etm = (WhatsHotFragment) getSupportFragmentManager().findFragmentByTag(EF);
+//            FragmentTransaction ft = fm.beginTransaction();
+//            ft.show(etm);
+//            ft.addToBackStack(null);
+//            ft.commit();
+//            return true;
+//        } else if (item.getItemId() == R.id.about) {
+//            alertScrollView();
+//        }
+//        return (super.onOptionsItemSelected(item));
+//    }
+//
+//    public void alertScrollView(){
+//        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        View myScrollView = inflater.inflate(R.layout.scroll_text, null, false);
+//        TextView tv = (TextView) myScrollView
+//                .findViewById(R.id.textViewWithScroll);
+//        tv.setText(getResources().getString(R.string.aboutme));
+//        new AlertDialog.Builder(MainActivity.this).setView(myScrollView)
+//                .setTitle(getResources().getString(R.string.app_name))
+//                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                    @TargetApi(11)
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        dialog.cancel();
+//                    }
+//                }).show();
+//    }
 
-    public void alertScrollView(){
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View myScrollView = inflater.inflate(R.layout.scroll_text, null, false);
-        TextView tv = (TextView) myScrollView
-                .findViewById(R.id.textViewWithScroll);
-        tv.setText(getResources().getString(R.string.aboutme));
-        new AlertDialog.Builder(MainActivity.this).setView(myScrollView)
-                .setTitle(getResources().getString(R.string.app_name_ross))
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @TargetApi(11)
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                }).show();
-    }
-}

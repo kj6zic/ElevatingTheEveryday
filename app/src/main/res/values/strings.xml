@@ -9,10 +9,10 @@
     <string name="action_share">Share</string>
     <string name="tab_all">All</string>
     <string name="loading_categories">Loading categories…</string>
-    <string name="loading_articles">Loading articles…</string>
+    <string name="loading_articles">Loading Awesomeness...</string>
     <string name="loading_comments">Loading Comments</string>
     <string name="action_refresh">Refresh</string>
-    <string name="action_send_to_wear">Send to my watch</string>
+    <!--<string name="action_send_to_wear">Send to my watch</string>-->
     <string name="error_load_categories">Network error. Failed to load categories.</string>
     <string name="error_load_posts">Network error. Failed to load articles.</string>
     <string name="action_retry">Retry</string>
@@ -40,7 +40,6 @@
     <string name="endorseUrl">https://www.instagram.com/rosssveback/?hl=en</string>
 
     <string name="desc_list_item_icon">Item Icon</string>
-    <string name="app_name_ross">Ross Sveback - Elevating The Everyday</string>
     <string name="aboutme">"Lifestyle expert, featured in Arch Digest, VOGUE and Delta Sky Magazine.\nVoted Top 100 Most Influential People by Mpls/St.Paul Magazine - FOX Lifestyle Expert"</string>
 
 </resources>

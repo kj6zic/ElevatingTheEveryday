@@ -137,7 +137,7 @@ public class TabLayoutFragment extends Fragment implements SearchView.OnQueryTex
     private void loadCategories() {
         // Display a progress dialog
         mProgressDialog = new ProgressDialog(getActivity());
-        mProgressDialog.setMessage(getString(R.string.loading_categories));
+        //mProgressDialog.setMessage(getString(R.string.loading_categories));
         // User cannot dismiss it by touching outside the dialog
         mProgressDialog.setCanceledOnTouchOutside(false);
         mProgressDialog.show();

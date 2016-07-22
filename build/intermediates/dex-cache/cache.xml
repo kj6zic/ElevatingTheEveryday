@@ -2,67 +2,67 @@
 <items version="2" >
 
     <item
-        jar="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
+        jar="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.2.1/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
-        <dex dex="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/pre-dexed/debug/classes-20d8c74c3e6e1716ef1a0cd7adcb546d2ff3cd28.jar" />
+        sha1="e1fa5e1123997a55e3ed65b44892993ff4b58cfe">
+        <dex dex="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/pre-dexed/release/classes-8ad5dbd3bdb19b9bb622c1110f2f0778b9244e77.jar" />
     </item>
     <item
         jar="/Users/ankitnegi/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
-        <dex dex="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-11f3bd5b00e3e3c5c6553cbfc3cd0a5ef209cbff.jar" />
-    </item>
-    <item
-        jar="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/exploded-aar/com.android.support/design/22.2.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="1821601ddbec5ff125653097812823388700af74">
-        <dex dex="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/pre-dexed/debug/classes-1ed2492fc9b03c98021cd01daa1f6f11120fd6da.jar" />
-    </item>
-    <item
-        jar="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.2.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e1fa5e1123997a55e3ed65b44892993ff4b58cfe">
-        <dex dex="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/pre-dexed/debug/classes-8ad5dbd3bdb19b9bb622c1110f2f0778b9244e77.jar" />
-    </item>
-    <item
-        jar="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
-        <dex dex="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-82956bf0733cc3dabe9464d922463ca1a9d9dd7c.jar" />
+        <dex dex="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/pre-dexed/release/support-annotations-22.2.1-11f3bd5b00e3e3c5c6553cbfc3cd0a5ef209cbff.jar" />
     </item>
     <item
         jar="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.2.1/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="3abb4b88f5a8a0584a9b01d3170d7165f12f8588">
-        <dex dex="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/pre-dexed/debug/classes-9afd0d7d1d71c317fe6f76c4202f1a2a02b25412.jar" />
+        <dex dex="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/pre-dexed/release/classes-9afd0d7d1d71c317fe6f76c4202f1a2a02b25412.jar" />
     </item>
     <item
-        jar="/Users/ankitnegi/ElevatingTheEveryday/app/libs/volley.jar"
+        jar="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="3a5961175b98494b89b7a24ac128e61e64ef7ef6">
-        <dex dex="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/pre-dexed/debug/volley-fd1b2fecfa93a4c74a0107f67f3a44a2a325972c.jar" />
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/pre-dexed/release/classes-20d8c74c3e6e1716ef1a0cd7adcb546d2ff3cd28.jar" />
+    </item>
+    <item
+        jar="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/exploded-aar/com.android.support/design/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1821601ddbec5ff125653097812823388700af74">
+        <dex dex="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/pre-dexed/release/classes-1ed2492fc9b03c98021cd01daa1f6f11120fd6da.jar" />
     </item>
     <item
         jar="/Users/ankitnegi/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.6.1/86b122e640af09b0723e1fa44083c354ba6d9089/glide-3.6.1.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="86b122e640af09b0723e1fa44083c354ba6d9089">
-        <dex dex="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/pre-dexed/debug/glide-3.6.1-229e9633b22c29f59cc0fa6353c6a5d4ffbc443a.jar" />
+        <dex dex="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/pre-dexed/release/glide-3.6.1-229e9633b22c29f59cc0fa6353c6a5d4ffbc443a.jar" />
     </item>
     <item
         jar="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="f8efd0096475e0daf054267b61544e10dc776503">
-        <dex dex="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/pre-dexed/debug/classes-ad0c0aee899e2273bba8ce77723f5867f27b9eca.jar" />
+        <dex dex="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/pre-dexed/release/classes-ad0c0aee899e2273bba8ce77723f5867f27b9eca.jar" />
+    </item>
+    <item
+        jar="/Users/ankitnegi/ElevatingTheEveryday/app/libs/volley.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3a5961175b98494b89b7a24ac128e61e64ef7ef6">
+        <dex dex="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/pre-dexed/release/volley-fd1b2fecfa93a4c74a0107f67f3a44a2a325972c.jar" />
+    </item>
+    <item
+        jar="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="/Users/ankitnegi/ElevatingTheEveryday/app/build/intermediates/pre-dexed/release/internal_impl-22.2.1-82956bf0733cc3dabe9464d922463ca1a9d9dd7c.jar" />
     </item>
 
 </items>

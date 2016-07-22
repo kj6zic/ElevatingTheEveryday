@@ -1,5 +1,6 @@
 package com.rosssveback.elevatingtheeveryday.app;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -67,8 +68,8 @@ public class PostFragment extends Fragment implements View.OnClickListener{
 
     public  PostFragment(){
     }
-
-    public PostFragment(Post post) {
+    @SuppressLint("ValidFragment")
+    private PostFragment(Post post) {
         // Required empty public constructor
         this.post = post;
     }

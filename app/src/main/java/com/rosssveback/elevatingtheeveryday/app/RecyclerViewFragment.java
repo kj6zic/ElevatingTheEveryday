@@ -234,7 +234,7 @@ public class RecyclerViewFragment extends Fragment implements SwipeRefreshLayout
 
         if (showLoadingMsg) {
             Toast.makeText(getActivity(), getString(R.string.loading_articles),
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
         }
 
         // Construct the proper API Url

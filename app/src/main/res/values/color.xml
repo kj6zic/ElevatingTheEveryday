@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#68747d</color>
+    <color name="colorPrimary">#ff7700</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#607D8B</color>
     <color name="cardBackground">#424242</color>
     <color name="commentCardBg">#ffffff</color>
     <color name="navigationBarColor">#000000</color>
     <color name="textColor">#FFDE00</color>
-    <color name="postTitleTextColor">#ffd300</color>
+    <color name="postTitleTextColor">#ff8800</color>
     <color name="cardTextColor">#FFFF2E2C</color>
 </resources>
